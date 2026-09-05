@@ -1,29 +1,24 @@
-n,m=[int(i) for i in input().split()]
+n=int(input())
 
-matrix_A=[]
+matrix_A=[]                 # Постоянная матрица
+matrix_result=[]            # Результат возведения в степень
 
-for i in range(n):
+for i in range(n):          
     elem=[int(num) for num in input().split()]
     matrix_A.append(elem)
+    matrix_result.append(elem)
 
-input()
+m=int(input())
 
-m,k=[int(i) for i in input().split()]
-
-matrix_B=[]
-
-for i in range(m):
-    elem=[int(num) for num in input().split()]
-    matrix_B.append(elem)
-
-matrix_result=[[0]*k for _ in range(n)]
-
-for i in range(n):
-    for j in range(k):
-        elem=0
-        for h in range(m):
-            elem+=matrix_A[i][h]*matrix_B[h][j]
-        matrix_result[i][j]=elem
+for _ in range(m-1):            # степень, в которую нужно возвести
+    matrix_intermediate=[[0]*n for _ in range(n)]      # Промежуточная матрица
+    for i in range(n):          # идем по строкам постоянной матрицы А
+        for j in range(n):      # идем по столбцам матрицы intermediate
+            elem=0
+            for h in range(n):  #идем по каждому элементу и строки матрицы А и столбца матрицы intermediate
+                elem+=matrix_A[i][h]*matrix_result[h][j]
+            matrix_intermediate[i][j]=elem
+    matrix_result=matrix_intermediate    # присваиваем конечной матрице промежуточный результат итеррации
 print()
 
 for i in range(n):
