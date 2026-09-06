@@ -1,14 +1,19 @@
 n=int(input())
-massiv=[int(num) for num in input().split()]
+massiv=[input() for _ in range(n)]
 
-sum_m=sum(massiv)
+counter_s=[]
+counter=[]
 
-if sum_m%(n-1) != 0:        # не можем разделить без остатка, значит не можем составить множества с одинаковыми суммами
-    print('NO')
-else:
-    target_amount=sum_m//(n-1)
-    non_target_amount = [i for i in massiv if i != target_amount]
-    if len(non_target_amount) == 2 and sum(non_target_amount) == target_amount:
-        print("YES")
+for i in range(n):
+    if massiv[i] in counter_s:
+        counter[counter_s.index(massiv[i])]+=1
     else:
-        print("NO")
+        counter_s.append(massiv[i])
+        counter.append(1)
+
+maximum=max(counter)
+
+for i in range(len(counter)):
+    if counter[i]==maximum:
+        print(counter_s[i])
+
